@@ -291,7 +291,6 @@ void Visuals::welcome()
         file.close();
     }
     
-    // Display logo once on welcome
     cout << "\033[2J\033[H";
     cout << CLR_BOLD << CLR_CYAN;
     for (const auto &line : logoLines) {
@@ -330,7 +329,6 @@ void Visuals::drawAnimatedLogo()
     
     _loadLogo();
     
-    // Simple animation: flash the logo a few times
     vector<string> effects = {CLR_DIM, CLR_BOLD, CLR_DIM, CLR_BOLD};
     
     for (const auto &effect : effects) {
@@ -346,7 +344,6 @@ void Visuals::drawAnimatedLogo()
         this_thread::sleep_for(chrono::milliseconds(100));
     }
     
-    // Final bright state
     cout << "\033[1;1H";
     cout << CLR_BOLD << CLR_CYAN;
     for (const auto &line : logoLines) {

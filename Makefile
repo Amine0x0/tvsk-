@@ -7,7 +7,7 @@ SRCS = $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/impl/*.cpp)
 OBJ = $(SRCS:.cpp=.o)
 
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -I$(INCLUDE_DIR) -std=c++17
+CXXFLAGS = -Wall -Wextra -Werror -I$(INCLUDE_DIR) -std=c++17 -fsanitize=address -g3
 
 all: $(NAME)
 

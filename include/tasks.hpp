@@ -36,10 +36,15 @@ class TaskManager {
 };
 
 class Visuals {
+    private:
+        std::vector<std::string> logoLines;
+        
+        void    _loadLogo();
     public:
         void    nlprint(std::string);
         void    drawfile(std::string);
         void    welcome();
+        void    drawAnimatedLogo();
 };
 
 class Core {

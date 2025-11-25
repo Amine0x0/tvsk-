@@ -136,7 +136,7 @@ void TaskManager::displayTasks() {
     cout << "\033[2J\033[H";
 
     Visuals visuals;
-    visuals.welcome();
+    visuals.drawAnimatedLogo();
 
     if (tasks.empty()) {
         cout << CLR_DIM << CLR_WHITE;
@@ -157,7 +157,7 @@ void TaskManager::_showHelp() {
     cout << "\033[2J\033[H";
 
     Visuals visuals;
-    visuals.welcome();
+    visuals.drawAnimatedLogo();
 
     cout << endl << CLR_BOLD << CLR_WHITE << "Commands:" << CLR_RESET << endl << endl;
     cout << CLR_CYAN << "[a]dd <task>        " << CLR_WHITE << "Add a new task" << CLR_RESET << endl;
@@ -181,8 +181,7 @@ void TaskManager::run() {
         cout.flush();
         
         if (!getline(cin, command)) {
-            _clearScreen();
-            cout << CLR_GREEN << CLR_BOLD;
+            cout << endl << CLR_GREEN << CLR_BOLD;
             cout << "Bye Bye :> " << CLR_RESET << endl;
             break;
         }
@@ -276,7 +275,83 @@ void Visuals::drawfile(std::string Path) {
 
 void Visuals::welcome()
 {
-    drawfile("./art/tvsk!");
+    using namespace std;
+    
+    if (logoLines.empty()) {
+        ifstream file("./art/tvsk!");
+        if (!file.is_open()) {
+            cerr << "Error: cannot open logo file ./art/tvsk!" << endl;
+            return;
+        }
+        
+        string line;
+        while (getline(file, line)) {
+            logoLines.push_back(line);
+        }
+        file.close();
+    }
+    
+    // Display logo once on welcome
+    cout << "\033[2J\033[H";
+    cout << CLR_BOLD << CLR_CYAN;
+    for (const auto &line : logoLines) {
+        cout << line << endl;
+    }
+    cout << CLR_RESET;
+    cout.flush();
+    
+    // Add spacing
     for (int i = 0; i < 3; i++)
-        nlprint("");
+        cout << endl;
+}
+
+void Visuals::_loadLogo()
+{
+    using namespace std;
+    
+    if (logoLines.empty()) {
+        ifstream file("./art/tvsk!");
+        if (!file.is_open()) {
+            cerr << "Error: cannot open logo file ./art/tvsk!" << endl;
+            return;
+        }
+        
+        string line;
+        while (getline(file, line)) {
+            logoLines.push_back(line);
+        }
+        file.close();
+    }
+}
+
+void Visuals::drawAnimatedLogo()
+{
+    using namespace std;
+    
+    _loadLogo();
+    
+    // Simple animation: flash the logo a few times
+    vector<string> effects = {CLR_DIM, CLR_BOLD, CLR_DIM, CLR_BOLD};
+    
+    for (const auto &effect : effects) {
+        cout << "\033[1;1H";  // Move cursor to top
+        cout << effect << CLR_CYAN;
+        
+        for (const auto &line : logoLines) {
+            cout << line << endl;
+        }
+        
+        cout << CLR_RESET;
+        cout.flush();
+        this_thread::sleep_for(chrono::milliseconds(100));
+    }
+    
+    // Final bright state
+    cout << "\033[1;1H";
+    cout << CLR_BOLD << CLR_CYAN;
+    for (const auto &line : logoLines) {
+        cout << line << endl;
+    }
+    cout << CLR_RESET;
+    cout.flush();
 }

@@ -13,7 +13,9 @@
 #define CLR_CYAN    "\033[36m"
 #define CLR_WHITE   "\033[37m"
 
-TaskManager::TaskManager() : taskFile(".tasks") {
+TaskManager::TaskManager() {
+    using namespace std;
+    taskFile = string(getenv("HOME")) + "/.local/share/tvsk/.tasks";
     _loadTasks();
 }
 
@@ -278,9 +280,10 @@ void Visuals::welcome()
     using namespace std;
     
     if (logoLines.empty()) {
-        ifstream file("./art/tvsk!");
+        string logoPath = string(getenv("HOME")) + "/.local/share/tvsk/art/tvsk!";
+        ifstream file(logoPath);
         if (!file.is_open()) {
-            cerr << "Error: cannot open logo file ./art/tvsk!" << endl;
+            cerr << "Error: cannot open logo file " << logoPath << endl;
             return;
         }
         
@@ -309,9 +312,10 @@ void Visuals::_loadLogo()
     using namespace std;
     
     if (logoLines.empty()) {
-        ifstream file("./art/tvsk!");
+        string logoPath = string(getenv("HOME")) + "/.local/share/tvsk/art/tvsk!";
+        ifstream file(logoPath);
         if (!file.is_open()) {
-            cerr << "Error: cannot open logo file ./art/tvsk!" << endl;
+            cerr << "Error: cannot open logo file " << logoPath << endl;
             return;
         }
         

@@ -25,7 +25,7 @@ install: all
 	@mkdir -p $(INSTALL_DATA_DIR)/art
 	cp $(NAME) $(INSTALL_BIN_DIR)/$(NAME)
 	cp art/tvsk! $(INSTALL_DATA_DIR)/art/tvsk!
-	cp .tasks $(INSTALL_DATA_DIR)/.tasks
+	cp tasks $(INSTALL_DATA_DIR)/.tasks
 	@echo "Installation complete: $(NAME) installed to $(INSTALL_BIN_DIR)"
 	@echo "Data files installed to $(INSTALL_DATA_DIR)"
 

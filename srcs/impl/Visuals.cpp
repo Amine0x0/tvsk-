@@ -49,15 +49,12 @@ void TaskManager::_loadTasks() {
                         priority = static_cast<TaskPriority>(priorityVal);
                         description = line.substr(secondSpace + 1);
                     } else {
-                        // Invalid priority, treat as old format
                         description = line.substr(firstSpace + 1);
                     }
                 } catch (...) {
-                    // Old format without priority, description starts after first space
                     description = line.substr(firstSpace + 1);
                 }
             } else {
-                // Old format without priority
                 description = line.substr(firstSpace + 1);
             }
         }
@@ -511,7 +508,6 @@ void Visuals::welcome()
     cout << CLR_RESET;
     cout.flush();
     
-    // Add spacing
     for (int i = 0; i < 3; i++)
         cout << endl;
 }
@@ -545,7 +541,7 @@ void Visuals::drawAnimatedLogo()
     vector<string> effects = {CLR_DIM, CLR_BOLD, CLR_DIM, CLR_BOLD};
     
     for (const auto &effect : effects) {
-        cout << "\033[1;1H";  // Move cursor to top
+        cout << "\033[1;1H";
         cout << effect << CLR_CYAN;
         
         for (const auto &line : logoLines) {

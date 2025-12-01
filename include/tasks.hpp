@@ -9,10 +9,10 @@
 #include <thread>
 
 enum class TaskPriority {
-    BLUE = 0,      // Low priority
-    ORANGE = 1,    // Medium priority
-    RED = 2,       // High priority
-    GREEN = 3      // Finished/Completed
+    BLUE = 0,
+    ORANGE = 1,
+    RED = 2,
+    GREEN = 3
 };
 
 struct Task {

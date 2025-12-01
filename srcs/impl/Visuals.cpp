@@ -18,12 +18,8 @@
 TaskManager::TaskManager() {
     using namespace std;
     taskFile = string(getenv("HOME"));
-    if(taskFile  == nullptr) {
-        std::cout <<CLR_RED  << "HOME not found " <<  CLR_RESET << std::endl;
-        exit(-1);
-    }
-    
-    taskFile = taskFile + "/.local/share/tvsk/.tasks"
+
+    taskFile = taskFile + "/.local/share/tvsk/.tasks";
     _loadTasks();
 }
 

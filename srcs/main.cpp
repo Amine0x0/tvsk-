@@ -2,6 +2,11 @@
 
 int main()
 {
+    
+    if(getenv("HOME") == nullptr){
+        return 1;
+    }
+
     Core *instance = new Core();
 
     try {
